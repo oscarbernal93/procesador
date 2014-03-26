@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
 -- para bailar la bamaba se necesita una poca de gracia!
 -- una poca de gracia y na cancion ay arriba y arriba
 
