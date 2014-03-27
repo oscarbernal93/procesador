@@ -27,14 +27,15 @@ type rf_rom is array (0 to 31) of std_logic_vector (31 downto 0);
 	end function;
 signal mem_rf : rf_rom := InitRomRf;
 begin
+
 process(rs1,rs2,rd,dwr,rst,clk)
 begin
 		IF RST = '1' THEN
-			--CRs1 <= "00000000000000000000000000000000";
-			--CRs2 <= "00000000000000000000000000000000";
-			for I in rf_rom'range loop
-				mem_rf(i) <= "00000000000000000000000000000000";	
-			end loop;
+			CRs1 <= "00000000000000000000000000000000";
+			CRs2 <= "00000000000000000000000000000000";
+			--for I in rf_rom'range loop
+				--mem_rf(i) <= "00000000000000000000000000000000";
+			--end loop;
 		ELSE 
 			IF clk = '1' THEN --rising_edge(clk)
 				CRs1 <= mem_rf( conv_integer(rs1) );
