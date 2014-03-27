@@ -14,13 +14,14 @@ architecture Behavioral of ALU is
 
 begin
 
-process	begin
+proc:process(ope1,ope2,ALUOP)
+	begin
 		IF ALUOP = "00000" THEN
 			result <= Ope1 + Ope2;
 		ELSIF ALUOP = "00001" THEN
 			result <= Ope1 - Ope2;
 		END IF;
-	end process;
+	end process proc;
 
 end Behavioral;
 
