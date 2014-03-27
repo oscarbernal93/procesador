@@ -25,11 +25,17 @@ type rf_rom is array (0 to 31) of std_logic_vector (31 downto 0);
 		end loop;
 		return var_rf;
 	end function;
+	
 signal mem_rf : rf_rom := InitRomRf;
-begin
 
+begin
 process(rs1,rs2,rd,dwr,rst,clk)
 begin
+
+mem_rf(0) <= "00000000000000000000000000000000";
+mem_rf(1) <= "00000000000000000000000000000001";
+mem_rf(2) <= "00000000000000000000000000000010";
+
 		IF RST = '1' THEN
 			CRs1 <= "00000000000000000000000000000000";
 			CRs2 <= "00000000000000000000000000000000";
