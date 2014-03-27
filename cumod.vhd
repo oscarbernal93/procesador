@@ -12,7 +12,8 @@ end cumod;
 architecture Behavioral of cumod is
 
 begin
-	process	begin
+process(op,op3)
+	begin
 		IF op = "10" THEN
 			IF op3 = "000000" THEN
 				--suma
