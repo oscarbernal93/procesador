@@ -25,6 +25,7 @@ architecture arqInstructionMemory of instructionMemory is
 		begin
 			for I in rom_type'range loop
 				readline (RomFile, RomFileLine);
+				exit when endfile(RomFile);
 				read(RomFileLine, temp_bv);
 				temp_mem(i) := to_stdlogicvector(temp_bv);
 			end loop;
@@ -35,8 +36,9 @@ architecture arqInstructionMemory of instructionMemory is
 	
 begin
 --reset,address, instructions)
-	process(reset,address, instructions)--clk)
+	process(reset,address)--clk)
 	begin
+	
 		--if(rising_edge(clk))then
 			if(reset = '1')then
 				outInstruction <= (others=>'0');
