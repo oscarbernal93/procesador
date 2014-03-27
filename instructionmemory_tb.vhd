@@ -33,9 +33,6 @@ ARCHITECTURE behavior OF instructionmemory_tb IS
  	--Outputs
    signal outInstruction : std_logic_vector(31 downto 0);
 
-   -- Clock period definitions
-   constant clk_period : time := 10 ns;
- 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -46,26 +43,16 @@ BEGIN
           outInstruction => outInstruction
         );
 
-   -- Clock process definitions
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
- 
-
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
-      wait for clk_period*10;
-
-      -- insert stimulus here 
-
+		address <= "00000000000000000000000000000001";
+      wait for 100 ns;	
+		address <= "00000000000000000000000000000010";
+		wait for 100 ns;	
+		address <= "00000000000000000000000000000011";
       wait;
    end process;
 
