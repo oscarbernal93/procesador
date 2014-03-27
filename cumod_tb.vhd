@@ -28,7 +28,6 @@ ARCHITECTURE behavior OF cumod_tb IS
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-   constant <clock>_period : time := 10 ns;
  
 BEGIN
  
@@ -39,24 +38,16 @@ BEGIN
           ALUOP => ALUOP
         );
 
-   -- Clock process definitions
-   <clock>_process :process
-   begin
-		<clock> <= '0';
-		wait for <clock>_period/2;
-		<clock> <= '1';
-		wait for <clock>_period/2;
-   end process;
- 
-
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
-      wait for <clock>_period*10;
-
+		op <= "10";
+		op3 <= "000000";
+		
+		wait for 100 ns;	
+		op3 <= "000100";
       -- insert stimulus here 
 
       wait;
