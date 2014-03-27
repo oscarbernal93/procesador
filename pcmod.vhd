@@ -14,7 +14,8 @@ architecture Behavioral of pcmod is
 
 begin 
 
-	process	begin
+process(PC_IN,CLK,RST)
+	begin
 		IF RST = '1' THEN
 			PC_OUT <= "00000000000000000000000000000000";
 		ELSIF rising_edge(CLK) THEN
