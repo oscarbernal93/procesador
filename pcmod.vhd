@@ -18,7 +18,7 @@ process(PC_IN,CLK,RST)
 	begin
 		IF RST = '1' THEN
 			PC_OUT <= "00000000000000000000000000000000";
-		ELSIF CLK = '1' THEN --rising_edge(CLK)
+		ELSIF rising_edge(CLK) THEN --rising_edge(CLK) --CLK = '1'
 			PC_OUT <= PC_IN;
 		END IF;
 	end process;
