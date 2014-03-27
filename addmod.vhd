@@ -16,7 +16,7 @@ architecture Behavioral of addmod is
 
 begin
 	--salida <= op1 + op2;
-	salida <= op1 + 4;
+	salida <= op1 + "00000000000000000000000000000100";
 
 end Behavioral;
 
