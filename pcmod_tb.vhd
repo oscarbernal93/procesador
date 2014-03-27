@@ -33,9 +33,6 @@ ARCHITECTURE behavior OF pcmod_tb IS
  	--Outputs
    signal PC_OUT : std_logic_vector(31 downto 0);
 
-   -- Clock period definitions
-   constant CLK_period : time := 10 ns;
- 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -45,15 +42,6 @@ BEGIN
           RST => RST,
           PC_OUT => PC_OUT
         );
-
-   -- Clock process definitions
-   CLK_process :process
-   begin
-		CLK <= '0';
-		wait for CLK_period/2;
-		CLK <= '1';
-		wait for CLK_period/2;
-   end process;
  
 
    -- Stimulus process
@@ -61,11 +49,14 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
-      wait for CLK_period*10;
-
-      -- insert stimulus here 
-
+		CLK <= '1';
+		PC_IN <= "00000000000000000000000000001000"; 
+		wait for 100 ns;
+		CLK <= '0';
+		PC_IN <= "00000000000000000000000000001001";
+		wait for 100 ns;
+		CLK <= '1';
+		PC_IN <= "00000000000000000000000000001010";
       wait;
    end process;
 
