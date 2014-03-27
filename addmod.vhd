@@ -15,7 +15,8 @@ end addmod;
 architecture Behavioral of addmod is
 
 begin
-	salida <= op1 + op2;
+	--salida <= op1 + op2;
+	salida <= op1 + 4;
 
 end Behavioral;
 
