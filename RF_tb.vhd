@@ -65,9 +65,20 @@ BEGIN
 		rd <= "00010";
 		dwr <= "00000000000000000000000000000100";
 		wait for 100 ns;
+		rd <= "00011";
+		dwr <= "00000000000000000001000010001011";
 		rs1 <= "00001";
 		rs2 <= "00010";
-		rd <= "00000";
+		wait for 100 ns;
+		rs1 <= "00011";
+		wait for 100 ns;
+		rst <= '1';
+		wait for 100 ns;
+		rst <= '0';
+		wait for 100 ns;
+		rs1 <= "00011";
+		wait for 100 ns;
+		rs1 <= "00001";
       wait;
    end process;
 
