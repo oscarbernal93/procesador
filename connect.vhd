@@ -5,7 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity connect is
 	Port ( rst : in  STD_LOGIC;
-			 clk : in STD_LOGIC);
+			 clk : in STD_LOGIC;
+			 aluresult : out  STD_LOGIC_VECTOR (31 downto 0));
 end connect;
 
 architecture Behavioral of connect is
@@ -54,14 +55,14 @@ COMPONENT pcmod
            PC_OUT : out  STD_LOGIC_VECTOR (31 downto 0));
 end COMPONENT;
 
-signal sum_npc : std_logic_vector (31 downto 1);
-signal npc_sum : std_logic_vector (31 downto 1);
-signal pc_im : std_logic_vector (31 downto 1);
-signal im_rf : std_logic_vector (31 downto 1);
-signal rf_alu1 : std_logic_vector (31 downto 1);
-signal rf_alu2 : std_logic_vector (31 downto 1);
-signal alu_rf : std_logic_vector (31 downto 1);
-signal cu_alu : std_logic_vector (4 downto 1);
+signal sum_npc : std_logic_vector (31 downto 0);
+signal npc_sum : std_logic_vector (31 downto 0);
+signal pc_im : std_logic_vector (31 downto 0);
+signal im_rf : std_logic_vector (31 downto 0);
+signal rf_alu1 : std_logic_vector (31 downto 0);
+signal rf_alu2 : std_logic_vector (31 downto 0);
+signal alu_rf : std_logic_vector (31 downto 0);
+signal cu_alu : std_logic_vector (4 downto 0);
 
 begin
 
@@ -76,9 +77,9 @@ usum: addmod PORT MAP (npc_sum,"00000000000000000000000000000000",sum_npc);
 unpc: pcmod PORT MAP (sum_npc,clk,rst,npc_sum);
 upc: pcmod PORT MAP (npc_sum,clk,rst,pc_im);
 uim: instructionMemory PORT MAP (clk,pc_im,rst,im_rf);
-urf: rf PORT MAP (im_rf(18 downto 14), im_rf(4 downto 0), im_rf(29 downto 30), alu_rf, rst, clk, rf_alu1, rf_alu2);
+urf: rf PORT MAP (im_rf(18 downto 14), im_rf(4 downto 0), im_rf(29 downto 25), alu_rf, rst, clk, rf_alu1, rf_alu2);
 ucu: cumod PORT MAP (im_rf(31 downto 30),im_rf(24 downto 19),cu_alu);
 ualu: alu PORT MAP (rf_alu1,rf_alu2,cu_alu,alu_rf);
-
+aluresult <= alu_rf;
 end Behavioral;
 
