@@ -28,9 +28,7 @@ ARCHITECTURE behavior OF addmod_tb IS
    signal salida : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
- 
-   constant <clock>_period : time := 10 ns;
- 
+	
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -40,26 +38,18 @@ BEGIN
           salida => salida
         );
 
-   -- Clock process definitions
-   <clock>_process :process
-   begin
-		<clock> <= '0';
-		wait for <clock>_period/2;
-		<clock> <= '1';
-		wait for <clock>_period/2;
-   end process;
- 
-
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
-      wait for <clock>_period*10;
-
       -- insert stimulus here 
-
+		op1 <= "00000000000000000000000000000010";
+		op2 <= "00000000000000000000000000000011";
+		wait for 100 ns;	
+      -- insert stimulus here 
+		op1 <= "00000000000000000000000000000010";
+		op2 <= "00000000000000000000000000000111";
       wait;
    end process;
 

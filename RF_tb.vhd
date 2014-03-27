@@ -32,15 +32,13 @@ ARCHITECTURE behavior OF RF_tb IS
    signal rd : std_logic_vector(4 downto 0) := (others => '0');
    signal dwr : std_logic_vector(31 downto 0) := (others => '0');
    signal rst : std_logic := '0';
-   signal clk : std_logic := '0';
+   signal clk : std_logic := '1';
 
  	--Outputs
    signal CRs1 : std_logic_vector(31 downto 0);
    signal CRs2 : std_logic_vector(31 downto 0);
 
    -- Clock period definitions
-   constant clk_period : time := 10 ns;
- 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -54,27 +52,22 @@ BEGIN
           CRs1 => CRs1,
           CRs2 => CRs2
         );
-
-   -- Clock process definitions
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
- 
-
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for clk_period*10;
-
+      wait for 100 ns;
+		clk <= '1';
       -- insert stimulus here 
-
+		rd <= "00001";
+		dwr <= "00000000000000000000000000000011";
+		wait for 100 ns;
+		rd <= "00010";
+		dwr <= "00000000000000000000000000000100";
+		wait for 100 ns;
+		rs1 <= "00001";
+		rs2 <= "00010";
+		rd <= "00000";
       wait;
    end process;
 
