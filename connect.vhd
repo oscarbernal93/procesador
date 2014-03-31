@@ -55,6 +55,22 @@ COMPONENT pcmod
            PC_OUT : out  STD_LOGIC_VECTOR (31 downto 0));
 end COMPONENT;
 
+COMPONENT muxer
+	PORT(
+		CRs2 : IN std_logic_vector(31 downto 0);
+		immediate : IN std_logic_vector(31 downto 0);
+		i : IN std_logic;          
+		ope2 : OUT std_logic_vector(31 downto 0)
+		);
+	END COMPONENT;
+
+COMPONENT seu
+	PORT(
+		simm13 : IN std_logic_vector(12 downto 0);          
+		immediate : OUT std_logic_vector(31 downto 0)
+		);
+	END COMPONENT;
+	
 signal sum_npc : std_logic_vector (31 downto 0);
 signal npc_sum : std_logic_vector (31 downto 0);
 signal pc_im : std_logic_vector (31 downto 0);
@@ -66,20 +82,13 @@ signal cu_alu : std_logic_vector (4 downto 0);
 
 begin
 
---im_rf
---+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
---|1 0|   rd    |    op3    |  rs1    |0| unused(zero)  |  rs2    |
---+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
--- 3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
--- 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
-
-usum: addmod PORT MAP (npc_sum,"00000000000000000000000000000000",sum_npc);
-unpc: pcmod PORT MAP (sum_npc,clk,rst,npc_sum);
-upc: pcmod PORT MAP (npc_sum,clk,rst,pc_im);
-uim: instructionMemory PORT MAP (clk,pc_im,rst,im_rf);
-urf: rf PORT MAP (im_rf(18 downto 14), im_rf(4 downto 0), im_rf(29 downto 25), alu_rf, rst, clk, rf_alu1, rf_alu2);
-ucu: cumod PORT MAP (im_rf(31 downto 30),im_rf(24 downto 19),cu_alu);
-ualu: alu PORT MAP (rf_alu1,rf_alu2,cu_alu,alu_rf);
-aluresult <= alu_rf;
+	usum: addmod PORT MAP (npc_sum,"00000000000000000000000000000000",sum_npc);
+	unpc: pcmod PORT MAP (sum_npc,clk,rst,npc_sum);
+	upc: pcmod PORT MAP (npc_sum,clk,rst,pc_im);
+	uim: instructionMemory PORT MAP (clk,pc_im,rst,im_rf);
+	urf: rf PORT MAP (im_rf(18 downto 14), im_rf(4 downto 0), im_rf(29 downto 25), alu_rf, rst, clk, rf_alu1, rf_alu2);
+	ucu: cumod PORT MAP (im_rf(31 downto 30),im_rf(24 downto 19),cu_alu);
+	ualu: alu PORT MAP (rf_alu1,rf_alu2,cu_alu,alu_rf);
+	aluresult <= alu_rf;
 end Behavioral;
 
