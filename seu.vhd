@@ -11,8 +11,12 @@ end seu;
 architecture Behavioral of seu is
 
 begin
-immediate <= (OTHERS => '0');  -- inicializar en 0
-immediate (12 downto 0) <= simm13;  -- copiar los 13 bits menos significativos
+process(simm13) begin
+
+	immediate <= (OTHERS => '0');  -- inicializar en 0
+	immediate (12 downto 0) <= simm13;  -- copiar los 13 bits menos significativos
+
+end process;
 
 end Behavioral;
 
