@@ -20,7 +20,7 @@ process (ALUOP,ALU1,ALU2,ALUR)
 			-- Negative
 			nzvc(3) <= ALUR(31);
 			-- Zero
-			if (ALUR(31) = '0') then
+			if (ALUR = "00000000000000000000000000000000") then
 				nzvc(2) <= '1';
 			else
 				nzvc(2) <= '0';
@@ -30,7 +30,18 @@ process (ALUOP,ALU1,ALU2,ALUR)
 			-- Carry
 			nzvc(0) <= (ALU1(31) and ALU2(31)) or ((not ALUR(31)) and (ALU1(31) or ALU2(31)));
 		elsif (ALUOP = "00011") then --resta mod icc
-			
+			-- Negative
+			nzvc(3) <= ALUR(31);
+			-- Zero
+			if (ALUR = "00000000000000000000000000000000") then
+				nzvc(2) <= '1';
+			else
+				nzvc(2) <= '0';
+			end if;
+			-- Overflow
+			nzvc(1) <= (ALU1(31) and (not ALU2(31)) and (not ALUR(31))) or ((not ALU1(31)) and ALU2(31) and ALUR(31));
+			-- Carry
+			nzvc(0) <= ((not ALU1(31)) and ALU2(31)) or (ALUR(31) and ((not ALU1(31)) or ALU2(31)));
 		end if;
 	end process;
 end Behavioral;
