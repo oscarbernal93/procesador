@@ -17,21 +17,20 @@ process (ALUOP,ALU1,ALU2,ALUR)
 	begin
 	   nzvc <= "0000";
 		if (ALUOP = "00010") then --suma mod icc 
-			if (ALU1(30) = '1' AND ALU2(30) = '1') then -- carry
-				-- nzvc(0) <= '1'; -- malo
+			-- Negative
+			nzvc(3) <= ALUR(31);
+			-- Zero
+			if (ALUR(31) = '0') then
+				nzvc(2) <= '1';
+			else
+				nzvc(2) <= '0';
 			end if;
-			if (signed(ALUR) < signed(ALU1) or signed(ALUR) < signed(ALU2)) then  -- overflow
-				nzvc(1) <= '1';  -- falla con numeros negativos
-			end if;
-			if (ALUR = 0) then
-				nzvc(2) <= '1';   -- z = 1
-			end if;
+			-- Overflow
+			nzvc(1) <= (ALU1(31) and ALU2(31) and (not ALUR(31))) or ((not ALU1(31)) and (not ALU2(31)) and ALUR(31));
+			-- Carry
+			nzvc(0) <= (ALU1(31) and ALU2(31)) or ((not ALUR(31)) and (ALU1(31) or ALU2(31)));
 		elsif (ALUOP = "00011") then --resta mod icc
-			if (ALUR = 0) then -- Zero
-				nzvc(2) <= '1';   -- z = 1
-			elsif (ALU2 > ALU1) then  --  ALUR(31) = 1 ?
-				nzvc(3) <= '1';  -- negative
-			end if;
+			
 		end if;
 	end process;
 end Behavioral;
