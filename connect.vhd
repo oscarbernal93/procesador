@@ -70,19 +70,38 @@ COMPONENT seu
 		immediate : OUT std_logic_vector(31 downto 0)
 		);
 	END COMPONENT;
+	
+COMPONENT psr
+	PORT(
+		nzvc : IN std_logic_vector(3 downto 0);
+		CLK : IN std_logic;          
+		carry : OUT std_logic
+		);
+	END COMPONENT;
+	
+COMPONENT psrmod
+	PORT(
+		ALUOP : IN std_logic_vector(4 downto 0);
+		ALU1 : IN std_logic_vector(31 downto 0);
+		ALU2 : IN std_logic_vector(31 downto 0);
+		ALUR : IN std_logic_vector(31 downto 0);          
+		nzvc : OUT std_logic_vector(3 downto 0)
+		);
+	END COMPONENT;
 
 -- Nomenclatura de las conexiones : Nombre de origen_Nombre de destino
 signal sum_npc : std_logic_vector (31 downto 0);
 signal npc_sum : std_logic_vector (31 downto 0);
 signal pc_im : std_logic_vector (31 downto 0);
 signal im_rf : std_logic_vector (31 downto 0);
-signal rf_alu1 : std_logic_vector (31 downto 0);
-signal rf_mux : std_logic_vector (31 downto 0);
-signal mux_alu2 : std_logic_vector (31 downto 0);
-signal alu_rf : std_logic_vector (31 downto 0);
-signal cu_alu : std_logic_vector (4 downto 0);
+signal rf_alu1 : std_logic_vector (31 downto 0); -- operando1 (ALU1)
+signal rf_mux : std_logic_vector (31 downto 0); 
+signal mux_alu2 : std_logic_vector (31 downto 0); -- operando2 (ALU2)
+signal alu_rf : std_logic_vector (31 downto 0); -- aluresult
+signal cu_alu : std_logic_vector (4 downto 0); -- ALUOP
 signal seu_mux : std_logic_vector (31 downto 0);
-
+signal psrmod_psr : std_logic_vector (3 downto 0);
+signal psr_alu : std_logic; -- carry
 
 
 begin
@@ -97,5 +116,7 @@ begin
 	aluresult <= alu_rf;
 	umux: muxer PORT MAP (rf_mux (31 downto 0), seu_mux (31 downto 0), im_rf(13),mux_alu2 (31 downto 0));
 	useu: seu PORT MAP (im_rf(12 downto 0), seu_mux);
+	upsr: psr PORT MAP(psrmod_psr ,clk, psr_alu);
+	upsrmod: psrmod PORT MAP(cu_alu, rf_alu1, mux_alu2, alu_rf, psrmod_psr);
 end Behavioral;
 
