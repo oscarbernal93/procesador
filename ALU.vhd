@@ -16,9 +16,9 @@ begin
 
 proc:process(ope1,ope2,ALUOP)
 	begin
-		IF ALUOP = "00000" THEN
+		IF (ALUOP = "00000" or ALUOP = "00010") THEN
 			result <= Ope1 + Ope2;
-		ELSIF ALUOP = "00001" THEN
+		ELSIF (ALUOP = "00001" or ALUOP = "00011") THEN
 			result <= Ope1 - Ope2;
 		END IF;
 	end process proc;
