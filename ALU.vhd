@@ -7,7 +7,7 @@ entity ALU is
     Port ( ope1 : in  STD_LOGIC_VECTOR (31 downto 0);
            ope2 : in  STD_LOGIC_VECTOR (31 downto 0);
            ALUOP : in  STD_LOGIC_VECTOR (4 downto 0);
-			  carry : in STD_LOGIC;
+			  carry : in STD_LOGIC := '0';
            result : out  STD_LOGIC_VECTOR (31 downto 0));
 end ALU;
 

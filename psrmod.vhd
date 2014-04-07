@@ -8,14 +8,13 @@ entity psrmod is
            ALU1 : in  STD_LOGIC_VECTOR (31 downto 0);
            ALU2 : in  STD_LOGIC_VECTOR (31 downto 0);
            ALUR : in  STD_LOGIC_VECTOR (31 downto 0);
-           nzvc : out  STD_LOGIC_VECTOR (3 downto 0));
+           nzvc : out  STD_LOGIC_VECTOR (3 downto 0) := "0000");
 end psrmod;
 
 architecture Behavioral of psrmod is
 begin
 process (ALUOP,ALU1,ALU2,ALUR)
 	begin
-	   nzvc <= "0000";
 		if (ALUOP = "00010") then --suma mod icc 
 			-- Negative
 			nzvc(3) <= ALUR(31);
