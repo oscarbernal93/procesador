@@ -21,6 +21,12 @@ process(op,op3)
 			ELSIF op3 = "000100" THEN
 				--resta
 				ALUOP <= "00001";
+			ELSIF op3 = "010000" THEN
+				--suma icc
+				ALUOP <= "00010";
+			ELSIF op3 = "010100" THEN
+				--resta icc
+				ALUOP <= "00011";
 			END IF;
 		END IF;
 	end process;
