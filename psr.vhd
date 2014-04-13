@@ -9,7 +9,7 @@ entity psr is
 			  RST : in STD_LOGIC;
 			  ncwp : in STD_LOGIC_VECTOR (4 downto 0);
            carry : out  STD_LOGIC;
-			  cwp : out STD_LOGIC_VECTOR (4 downto 0))
+			  cwp : out STD_LOGIC_VECTOR (4 downto 0));
 end psr;
 
 architecture Behavioral of psr is
