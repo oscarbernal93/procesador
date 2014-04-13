@@ -7,7 +7,9 @@ entity psr is
     Port ( nzvc : in  STD_LOGIC_VECTOR (3 downto 0);
 			  CLK : in STD_LOGIC;
 			  RST : in STD_LOGIC;
-           carry : out  STD_LOGIC);
+			  ncwp : in STD_LOGIC_VECTOR (4 downto 0);
+           carry : out  STD_LOGIC;
+			  cwp : out STD_LOGIC_VECTOR (4 downto 0))
 end psr;
 
 architecture Behavioral of psr is
@@ -15,7 +17,7 @@ SIGNAL rpsr : std_logic_vector (31 downto 0) := "0000000000000000000000000000000
 begin
 process (rpsr,nzvc,CLK, RST)
 	begin	
-	if rst then
+	if rst = '1' then
 		carry <= '0';
 	else
 		IF rising_edge(CLK) THEN

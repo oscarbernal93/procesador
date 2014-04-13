@@ -1,14 +1,14 @@
-00000 suma
-00001 resta
-00010 suma mod icc 
-00011 resta mod icc
-00100 suma carry
-00101 resta carry
-00110 suma carry & mod icc
-00111 suma carry & mod icc
-01000
-01001
-01010
+0	00000 suma
+1	00001 resta
+2	00010 suma mod icc 
+3	00011 resta mod icc
+4	00100 suma carry
+5	00101 resta carry
+6	00110 suma carry & mod icc
+7	00111 suma carry & mod icc
+8	01000
+9	01001
+10	01010
 01011
 01100
 01101
