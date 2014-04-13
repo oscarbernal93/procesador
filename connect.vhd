@@ -74,7 +74,8 @@ COMPONENT seu
 COMPONENT psr
 	PORT(
 		nzvc : IN std_logic_vector(3 downto 0);
-		CLK : IN std_logic;          
+		CLK : IN std_logic; 
+		rst : IN std_logic;
 		carry : OUT std_logic
 		);
 	END COMPONENT;
@@ -116,7 +117,7 @@ begin
 	aluresult <= alu_rf;
 	umux: muxer PORT MAP (rf_mux (31 downto 0), seu_mux (31 downto 0), im_rf(13),mux_alu2 (31 downto 0));
 	useu: seu PORT MAP (im_rf(12 downto 0), seu_mux);
-	upsr: psr PORT MAP(psrmod_psr ,clk, psr_alu);
+	upsr: psr PORT MAP(psrmod_psr ,clk,'0', psr_alu);
 	upsrmod: psrmod PORT MAP(cu_alu, rf_alu1, mux_alu2, alu_rf, psrmod_psr);
 end Behavioral;
 
