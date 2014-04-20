@@ -43,20 +43,19 @@ process (ALUOP,ALU1,ALU2,ALUR)
 			-- Carry
 			nzvc(0) <= ((not ALU1(31)) and ALU2(31)) or (ALUR(31) and ((not ALU1(31)) or ALU2(31)));
 
-		elsif (ALUOP = "01001" or ALUOP = "01011" or ALUOP = "01101") then ( -- ANDcc ORcc XORcc
+		elsif (ALUOP = "01001" or ALUOP = "01011" or ALUOP = "01101") then  -- ANDcc ORcc XORcc
 			-- Negative
 			nzvc(3) <= ALUR(31);
 			-- Zero
 			if (ALUR = "00000000000000000000000000000000") then 
 				nzvc(2) <= '1'; 
 			else
-				nzvc(2) <= '0';
+				nzv;c(2) <= '0';
+			end if;
 			-- Overflow
 			nzvc(1) <= '0';
 			-- Carry
 			nzvc(1) <= '0';
-			);
-
 		end if;
 	end process;
 end Behavioral;

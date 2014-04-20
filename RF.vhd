@@ -16,7 +16,7 @@ end RF;
 
 architecture Behavioral of RF is
 
-type rf_rom is array (0 to 31) of std_logic_vector (31 downto 0);
+type rf_rom is array (0 to 63) of std_logic_vector (31 downto 0);
 	impure function InitRomRf return rf_rom is
 		variable var_rf : rf_rom;
 		begin
@@ -32,11 +32,11 @@ begin
 process(rs1,rs2,rd,dwr,rst,clk)
 begin
 
-mem_rf(0) <= "00000000000000000000000000000000";
-mem_rf(1) <= "00000000000000000000000000000001";
-mem_rf(2) <= "00000000000000000000000000000010";
-mem_rf(3) <= "11111111111111111111111111111101";
-mem_rf(4) <= "00000000000000000000000000000100";
+mem_rf(0) <= "00000000000000000000000000000000";  -- 0
+mem_rf(1) <= "00000000000000000000000000000001";  -- 1 
+mem_rf(2) <= "00000000000000000000000000000010";  -- 2
+mem_rf(3) <= "11111111111111111111111111111101";  -- -3
+mem_rf(4) <= "00000000000000000000000000000100";  -- 4
 
 		IF RST = '1' THEN
 			CRs1 <= "00000000000000000000000000000000";
