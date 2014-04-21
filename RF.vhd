@@ -45,7 +45,7 @@ mem_rf(4) <= "00000000000000000000000000000100";  -- 4
 				--mem_rf(i) <= "00000000000000000000000000000000";
 			--end loop;
 		ELSE 
-			IF clk = '1' THEN --rising_edge(clk)
+			IF rising_edge(clk) THEN
 				CRs1 <= mem_rf( conv_integer(rs1) );
 				CRs2 <= mem_rf( conv_integer(rs2) );
 				IF rd /= "00000" THEN

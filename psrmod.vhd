@@ -50,7 +50,7 @@ process (ALUOP,ALU1,ALU2,ALUR)
 			if (ALUR = "00000000000000000000000000000000") then 
 				nzvc(2) <= '1'; 
 			else
-				nzv;c(2) <= '0';
+				nzvc(2) <= '0';
 			end if;
 			-- Overflow
 			nzvc(1) <= '0';

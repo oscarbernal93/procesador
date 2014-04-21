@@ -15,8 +15,8 @@ entity psr is
     Port ( nzvc : in  STD_LOGIC_VECTOR (3 downto 0);
 			  CLK : in STD_LOGIC;
 			  RST : in STD_LOGIC;
-			  ncwp : in STD_LOGIC_VECTOR (4 downto 0);
-           carry : out  STD_LOGIC;
+			  ncwp : in STD_LOGIC_VECTOR (4 downto 0) := "00000";
+           carry : out  STD_LOGIC := '0';
 			  cwp : out STD_LOGIC_VECTOR (4 downto 0));
 end psr;
 

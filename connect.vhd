@@ -15,6 +15,7 @@ COMPONENT ALU
     Port ( ope1 : in  STD_LOGIC_VECTOR (31 downto 0);
            ope2 : in  STD_LOGIC_VECTOR (31 downto 0);
            ALUOP : in  STD_LOGIC_VECTOR (4 downto 0);
+			  carry : in STD_LOGIC;
            result : out  STD_LOGIC_VECTOR (31 downto 0));
 end COMPONENT;
 
@@ -111,9 +112,9 @@ begin
 	unpc: pcmod PORT MAP (sum_npc,clk,rst,npc_sum);
 	upc: pcmod PORT MAP (npc_sum,clk,rst,pc_im);
 	uim: instructionMemory PORT MAP (clk,pc_im,rst,im_rf);
-	urf: rf PORT MAP (im_rf(18 downto 14), im_rf(4 downto 0), im_rf(29 downto 25), alu_rf, rst, clk, rf_alu1, rf_mux);
+	urf: rf PORT MAP ('0' & im_rf(18 downto 14), '0' & im_rf(4 downto 0), '0' & im_rf(29 downto 25), alu_rf, rst, clk, rf_alu1, rf_mux);
 	ucu: cumod PORT MAP (im_rf(31 downto 30),im_rf(24 downto 19),cu_alu);
-	ualu: alu PORT MAP (rf_alu1,mux_alu2,cu_alu,alu_rf);
+	ualu: alu PORT MAP (rf_alu1,mux_alu2,cu_alu,psr_alu,alu_rf);
 	aluresult <= alu_rf;
 	umux: muxer PORT MAP (rf_mux (31 downto 0), seu_mux (31 downto 0), im_rf(13),mux_alu2 (31 downto 0));
 	useu: seu PORT MAP (im_rf(12 downto 0), seu_mux);
