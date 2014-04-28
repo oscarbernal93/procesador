@@ -8,7 +8,6 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity addmod is
     Port ( op1 : in  STD_LOGIC_VECTOR (31 downto 0);
-           op2 : in  STD_LOGIC_VECTOR (31 downto 0);
            salida : out  STD_LOGIC_VECTOR (31 downto 0));
 end addmod;
 
